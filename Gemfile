@@ -12,7 +12,13 @@ gem 'rails_12factor'
 gem 'pg'
 gem 'haml'
 
+gem 'omniauth'
+gem 'omniauth-github'
+
 group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'pry'
+end

@@ -3,11 +3,13 @@
 <head>
   <title>Writing.is - Publish with the power of github.</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <% if params[:controller] == 'application' %>
+    <%= stylesheet_link_tag    "homepage/styles", media: "all", "data-turbolinks-track" => false %>
+  <% end %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= yield %>
 
 </body>
