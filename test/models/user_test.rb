@@ -49,5 +49,9 @@ class UserTest < ActiveSupport::TestCase
     user = User.create_with_omniauth({})
     assert user == nil
   end
+
+  test "#create_with_omniauth returns nil when nil is passed in" do
+  assert User.create_with_omniauth(nil) == nil
+  end
 end
  

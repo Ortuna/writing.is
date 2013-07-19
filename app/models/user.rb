@@ -4,6 +4,7 @@
   validates_uniqueness_of :uid
 
   def self.create_with_omniauth(auth = {})
+    return nil unless auth
     user       = User.new
     user.attributes = {
       provider:  auth['provider'],
