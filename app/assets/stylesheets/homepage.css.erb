@@ -1,5 +1,6 @@
 body {
   background-image: url(<%= asset_path('blur.jpg') %>);
+  background-repeat: no-repeat;
 }
 
 
@@ -25,6 +26,37 @@ h2.headline {
   color:#000;
 }
 
+.top {
+  margin-bottom: 50px;
+}
+
 .container.header {
   color:#FFF;
+}
+
+.odd-strip {
+  background-color: #F6F6F6;
+
+}
+
+.container.strip {
+  margin: 20px auto;
+  /*padding: 20px;*/
+}
+
+.main-content {
+  background-color: #FFF;
+  padding:40px 0px;
+}
+
+img.window-one {
+  background-image: url(<%= asset_path('homepage/landing-pages.png')%>);
+  background-position: 0px 20px;
+  background-repeat: no-repeat;
+}
+
+img.window-three {
+  background-image: url(<%= asset_path('homepage/landing-split.png')%>);
+  background-position: 0px 20px;
+  background-repeat: no-repeat;
 }
