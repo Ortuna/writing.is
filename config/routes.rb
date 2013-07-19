@@ -1,5 +1,6 @@
 Writing::Application.routes.draw do
   root 'application#index'
 
-  match '/user/login', to: 'user#login', via: [:get]
+  get '/user/login', to: 'user#login'
+  get '/user/login/callback', to: 'omniauth_github#callback'
 end

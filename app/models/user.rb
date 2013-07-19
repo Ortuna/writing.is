@@ -3,7 +3,7 @@
   validates_presence_of   :uid, :provider, :name
   validates_uniqueness_of :uid
 
-  def self.create_with_omniauth(auth)
+  def self.create_with_omniauth(auth = {})
     user       = User.new
     user.attributes = {
       provider:  auth['provider'],
