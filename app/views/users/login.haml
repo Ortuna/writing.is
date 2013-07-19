@@ -1,2 +1,4 @@
-.alert.alert-error
-  Error logging in  
+- unless flash[:error].blank?
+  .alert.alert-error
+    Error logging in
+    = flash[:error] 

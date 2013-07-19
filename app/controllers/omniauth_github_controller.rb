@@ -8,8 +8,9 @@ class OmniauthGithubController < BaseController
     if account
       redirect_to books_path
     else
+      flash[:error] = 'A login error has occured'
       redirect_to user_login_path
     end
-    # account ? redirect_and_set_current_account(account) : redirect_auth_failed
+
   end
 end

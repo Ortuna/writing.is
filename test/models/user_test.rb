@@ -40,18 +40,18 @@ class UserTest < ActiveSupport::TestCase
 
     user = User.create_with_omniauth(github_hash)
 
-    assert user.uid       == 'uid'
-    assert user.provider  == 'github'
-    assert user.name      == 'test_user'
-    assert user.image_url == 'some_string'
-    assert user.role      == 'author'
+    assert_equal 'uid', user.uid
+    assert_equal 'github', user.provider
+    assert_equal 'test_user', user.name
+    assert_equal 'some_string', user.image_url
+    assert_equal 'author', user.role
 
     user = User.create_with_omniauth({})
-    assert user == nil
+    assert_equal nil, user
   end
 
   test "#create_with_omniauth returns nil when nil is passed in" do
-  assert User.create_with_omniauth(nil) == nil
+    assert_equal nil,User.create_with_omniauth(nil)
   end
 end
  

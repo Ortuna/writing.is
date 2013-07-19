@@ -5,8 +5,16 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test 'shows an error flash' do
-    flash[:error] = 'invalid login!'
+  test 'can logout user' do
+    session[:stuff] = "some session info"
+
+    get :logout
+    assert_redirected_to user_login_path
+    assert_equal nil, session[:stuff]
+  end
+
+  xtest 'shows an error flash' do
+    flash.now[:error] = 'invalid login!'
     
     get :login
     assert_select '.alert.alert-error'

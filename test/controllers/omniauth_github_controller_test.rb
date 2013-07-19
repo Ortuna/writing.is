@@ -26,8 +26,8 @@ class OmniauthGithubControllerTest < ActionController::TestCase
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github] 
 
     get :callback
-    assert User.first.uid      == '1234'
-    assert User.first.provider == 'github'
+    assert_equal '1234',   User.first.uid
+    assert_equal 'github', User.first.provider
   end
 
   test 'redirect on valid auth' do
