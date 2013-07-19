@@ -1,0 +1,10 @@
+!!!
+%html
+ %head
+  %title Writing.is - Publish with the power of github.
+  = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+  = stylesheet_link_tag "homepage/styles", media: "all", "data-turbolinks-track" => false 
+  = javascript_include_tag "application", "data-turbolinks-track" => true
+  = csrf_meta_tags
+ %body
+  = yield

@@ -1,5 +1,5 @@
 Writing::Application.routes.draw do
-  root 'application#index'
+  root 'homepage#index'
 
   get '/user/login',  to: 'users#login'
   get '/user/logout', to: 'users#logout'
