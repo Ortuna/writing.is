@@ -3,18 +3,28 @@
     .links
       %ul.nav.nav-pills
         %li
-          %a{:href => '#'} Contact Us
+          %a{:href => '#', :class => 'contact-us'} Contact Us
         %li
-          %a{:href => '#'} Login
+          %a{:href => '/login', :class => 'login'} Login
   .container.header
     .row.hero
       .span12
-        %h2.headline Write. Collaborate. Iterate.
+        %h1.title Writing.is
+        %h2.headline Write with the power of github.
+    .row.signup.span7.offset3
+      .span3
+        %input{:type => 'text', :placeholder => 'Email address'}
+      .span2
+        %a.btn-signup{:href => '#', :class => 'btn btn-large btn-block btn-success'}
+          Get an invite
 .main-content
   .container.strip
     .row
-      .span6
-        %h2 Write
+      .span6.content
+        %br
+        %br
+        %br
+        %h2 Focus on what you need to
         %p
           With WizzyWig, anyone on your team can edit your website. Our editor lets you make changes directly to your website and have them immediately go live.
       .span6
@@ -22,20 +32,32 @@
 
   .odd-strip
     .container.strip
-      .row
+      %br
+      %br
+      %br
+      %br
+      .row.faces
         .span6
-          =image_tag('homepage/empty-window.png', :class => 'window-two')
-        .span6
+          =image_tag('homepage/faces/sarah.jpg', :class => 'face')
+          =image_tag('homepage/faces/kaitlin.jpg', :class => 'face')
+          =image_tag('homepage/faces/sumeet.png', :class => 'face')
+          
+
+        .span5.content.pull-left
           %h2 Collaborate
           %p
-            With WizzyWig, anyone on your team can edit your website. Our editor lets you make changes directly to your website and have them immediately go live.
+            With WizzyWig it's impossible to make a mistake. You can undo any change with our complete revision history. You can even switch between older versions of your website. Neat.
 
 
   .container.strip
     .row
-      .span6
+      .span6.content
+        %br
+        %br
+        %br
+        %br
         %h2 Iterate
         %p
-          With WizzyWig, anyone on your team can edit your website. Our editor lets you make changes directly to your website and have them immediately go live.
+          Copy-paste one piece of code, one time, and you'll be up and running. Manage edits, upload images, and create new pages all from one simple dashboard.
       .span6
         =image_tag('homepage/empty-window.png', :class => 'window-three')
