@@ -1,2 +1,12 @@
-.span12
-  = debug current_user
+%header
+  .row
+    .span12
+      .span1
+        = image_tag(current_user[:image_url], :class => 'profile-image')
+      .span2
+        .row.span6
+          %h4 Ortuna
+        .row.span6
+          %h3 Explore Repos
+      .span3.offset3.search
+        %input{:type => 'text', :class => 'span3', :placeholder => 'Find a repo'}
