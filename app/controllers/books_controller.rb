@@ -6,11 +6,7 @@ class BooksController < BaseController
   end
 
   def index
-    
-  end
-
-  private 
-  def current_user
-    @current_user ||= current_user
+    @current_user = current_user
+    # @repos        = 
   end
 end

@@ -3,10 +3,10 @@ class OmniauthGithubController < BaseController
 
   def callback
     auth    = request.env["omniauth.auth"]
-    account = User.find_with_omniauth(auth) || User.create_with_omniauth(auth)
+    user = User.find_with_omniauth(auth) || User.create_with_omniauth(auth)
 
-    if account
-      session[:user_id] = account[:id]
+    if user
+      session[:user_id] = user[:id]
       redirect_to books_path
     else
       flash[:error] = 'A login error has occured'

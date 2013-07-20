@@ -15,6 +15,8 @@ gem 'haml'
 gem 'omniauth'
 gem 'omniauth-github'
 
+gem 'octokit'
+
 group :doc do
   gem 'sdoc', require: false
 end

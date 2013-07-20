@@ -1,6 +1,6 @@
   class User < ActiveRecord::Base
 
-  validates_presence_of   :uid, :provider, :name
+  validates_presence_of   :uid, :provider, :name, :auth_token
   validates_uniqueness_of :uid
 
   def self.create_with_omniauth(auth = {})
@@ -11,6 +11,7 @@
       uid:       auth['uid'],
       name:      (auth['info'] && auth['info']['name'])  || nil,
       image_url: (auth['info'] && auth['info']['image']) || nil,
+      auth_token:(auth['credentials'] && auth['credentials']['token']) || nil,
       role:      'author'
     }
     user.save ? user : nil

@@ -1,40 +1,32 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  def fake_hash
-    github_hash = {
-      provider: 'github',
-      uid:      'uid',
-      info: {
-        name: 'test_user',
-        image: 'some_string',
-        role:  'author'
-      }
-    }.with_indifferent_access
-  end
-
   test "validates presence of :uid, :provider, :name" do
-    user = User.new(uid: 1, provider: 'github', name: 'test_user')
+    user = User.new(uid: 1, provider: 'github', name: 'test_user', auth_token: 'xyz')
     assert user.save
 
-    user = User.new(provider: 'github', name: 'test_user')
+    user = User.new(provider: 'github', name: 'test_user', auth_token: 'xyz')
     refute user.save
     refute_empty user.errors[:uid], ":uid errors should not be empty"
 
-    user = User.new(uid: 1, name: 'test_user')
+    user = User.new(uid: 1, name: 'test_user', auth_token: 'xyz')
     refute user.save
     refute_empty user.errors[:provider], ":provider errors should not be empty"
 
-    user = User.new(uid: 1, provider: 'github')
+    user = User.new(uid: 1, provider: 'github', auth_token: 'xyz')
     refute user.save
     refute_empty user.errors[:name], ":name errors should not be empty"
+
+    user = User.new(uid: 1, provider: 'github', name: 'test_user')
+    refute user.save
+    refute_empty user.errors[:auth_token], ":auth_token errors should not be empty"
   end
 
   test "validates uniqueness of :uid" do
-    user = User.new(uid: 1, provider: 'github', name: 'test_user')
+    user = User.new(uid: 1, provider: 'github', name: 'test_user', auth_token: '123')
     user.save
 
-    user = User.new(uid: 1, provider: 'github', name: 'test_user')
+    user = User.new(uid: 1, provider: 'github', name: 'test_user', auth_token: '123')
     refute user.save
     refute_empty user.errors[:uid]
   end

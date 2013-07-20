@@ -13,3 +13,18 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+def fake_hash
+  {
+    provider: 'github',
+    uid:      'uid',
+    credentials: {
+     token: '1234'
+    },
+    info: {
+      name: 'test_user',
+      image: 'some_string',
+      role:  'author'
+    }
+  }.with_indifferent_access
+end
