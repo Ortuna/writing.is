@@ -1,5 +1,5 @@
 require 'test_helper'
-class ApplicationControllerTest < ActionController::TestCase
+class HomepageControllerTest < ActionController::TestCase
   
   test "should get index" do
     get :index
