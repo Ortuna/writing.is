@@ -14,6 +14,7 @@
       auth_token:(auth['credentials'] && auth['credentials']['token']) || nil,
       role:      'author'
     }
+    require 'pry';binding.pry
     user.save ? user : nil
   end
 
