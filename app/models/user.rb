@@ -16,4 +16,9 @@
     user.save ? user : nil
   end
 
+  def self.find_with_omniauth(auth = {})
+    return nil unless auth && auth[:uid]
+    User.where(uid: auth[:uid]).first
+  end
+
 end

@@ -13,11 +13,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal nil, session[:stuff]
   end
 
-  xtest 'shows an error flash' do
-    flash.now[:error] = 'invalid login!'
+  # xtest 'shows an error flash' do
+  #   flash.now[:error] = 'invalid login!'
     
-    get :login
-    assert_select '.alert.alert-error'
-  end
+  #   get :login
+  #   assert_select '.alert.alert-error'
+  # end
 
 end

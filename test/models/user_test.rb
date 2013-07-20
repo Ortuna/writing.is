@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  def fake_hash
+    github_hash = {
+      provider: 'github',
+      uid:      'uid',
+      info: {
+        name: 'test_user',
+        image: 'some_string',
+        role:  'author'
+      }
+    }.with_indifferent_access
+  end
+
   test "validates presence of :uid, :provider, :name" do
     user = User.new(uid: 1, provider: 'github', name: 'test_user')
     assert user.save
@@ -28,17 +40,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "#create_with_omniauth" do
-    github_hash = {
-      provider: 'github',
-      uid:      'uid',
-      info: {
-        name: 'test_user',
-        image: 'some_string',
-        role:  'author'
-      }
-    }.with_indifferent_access
-
-    user = User.create_with_omniauth(github_hash)
+    user = User.create_with_omniauth(fake_hash)
 
     assert_equal 'uid', user.uid
     assert_equal 'github', user.provider
@@ -52,6 +54,16 @@ class UserTest < ActiveSupport::TestCase
 
   test "#create_with_omniauth returns nil when nil is passed in" do
     assert_equal nil,User.create_with_omniauth(nil)
+  end
+
+  test "#find_with_omniauth finds a user with omniauth hash" do
+    User.create_with_omniauth(fake_hash)
+    user = User.find_with_omniauth(fake_hash)
+    assert_equal 'uid', user[:uid]
+  end
+
+  test "#find_with_omniauth returns nil when user is not found" do
+    assert_equal nil, User.find_with_omniauth({})
   end
 end
  

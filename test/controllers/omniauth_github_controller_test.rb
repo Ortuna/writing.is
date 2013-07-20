@@ -43,6 +43,17 @@ class OmniauthGithubControllerTest < ActionController::TestCase
     assert_redirected_to user_login_path
   end
 
+  test 'auth an already existing user' do
+    OmniAuth.config.add_mock(:github, fake_hash)
+    @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+
+    get :callback
+
+    @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+    get :callback
+    assert_redirected_to books_path
+  end
+
   # test 'redirect to error when invalid session'
   
 end

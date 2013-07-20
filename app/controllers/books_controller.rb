@@ -5,6 +5,6 @@ class BooksController < BaseController
   end
 
   def index
-    render text: 'done'
+    
   end
 end
