@@ -7,6 +7,6 @@ class BooksController < BaseController
 
   def index
     @current_user = current_user
-    # client = Octokit::Client.new(:login => "me", :oauth_token => @current_user[:auth_token])
+    flash[:warn] = 'Ohh noze!'
   end
 end
