@@ -10,3 +10,12 @@
           %h3 Explore Repos
       .span3.offset3.search
         %input{:type => 'text', :class => 'span3', :placeholder => 'Find a repo'}
+.span12
+  .books
+    - @repos.each do |repo|
+      .book{:class => cycle('odd', 'even') }
+        .row.span8.offset1.name
+          %h4=link_to(repo["name"], '/books')
+        .row.span8.offset1.desc
+          = repo["description"]
+

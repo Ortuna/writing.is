@@ -1,0 +1,12 @@
+
+.book .row {
+  padding: 10px;
+}
+
+.book .desc {
+  margin-bottom: 10px;
+}
+
+.book.odd .row {
+  background-color: #f8f8f8;
+}

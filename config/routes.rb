@@ -6,5 +6,5 @@ Writing::Application.routes.draw do
   get '/user/login/callback',  to: 'omniauth_github#callback'
   get '/auth/github/callback', to: 'omniauth_github#callback'
 
-  resources :books
+  resources :repos
 end

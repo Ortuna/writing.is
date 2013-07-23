@@ -8,7 +8,7 @@ class GithubAuthIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'login with github' do
     get_via_redirect '/auth/github'
-    assert_equal books_path, path
+    assert_equal repos_path, path
   end
 
 end

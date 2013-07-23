@@ -16,3 +16,7 @@ header h3 {
 .search input {
   margin-top:10px;
 }
+
+.messages .alert {
+  margin-left: 15px;
+}
