@@ -42,8 +42,11 @@ describe ReposController do
 
     it 'should have a links to repo files' do
       get :index
-      expect(response.body).to match repo_files_path(repo_hash[0]["name"])
-      expect(response.body).to match repo_files_path(repo_hash[1]["name"])
+      path_example0 = repo_files_path(repo_hash[0]['name'])
+      path_example1 = repo_files_path(repo_hash[1]['name'])
+
+      response.body.should have_css("a[href~='#{path_example0}']")
+      response.body.should have_css("a[href~='#{path_example1}']")
     end
   end
 
