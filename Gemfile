@@ -23,4 +23,5 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec-rails', '~> 2.0'
 end

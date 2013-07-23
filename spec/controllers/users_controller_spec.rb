@@ -1,16 +1,16 @@
-require 'test_helper'
-class UsersControllerTest < ActionController::TestCase
-  test 'can get to the login page' do
+require 'spec_helper'
+describe UsersController do
+  it 'can get to the login page' do
     get :login
-    assert_response :success
+    response.should be_success
   end
   
-  test 'can logout user' do
+  it 'can logout user' do
     session[:stuff] = "some session info"
 
     get :logout
     assert_redirected_to user_login_path
-    assert_equal nil, session[:stuff]
+    session[:stuff].should == nil
   end
 
   # xtest 'shows an error flash' do

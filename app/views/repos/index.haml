@@ -15,6 +15,6 @@
     - @repos.each do |repo|
       .repo{:class => cycle('odd', 'even') }
         .row.span8.offset1
-          %h4=link_to(repo["name"], '/books')
+          %h4=link_to(repo["name"], repo_path(repo["name"]))
           %p= repo["description"]
 
