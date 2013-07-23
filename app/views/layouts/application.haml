@@ -7,16 +7,18 @@
     = csrf_meta_tags
   %body
     %div.container.with-room
-      .messages.row.span8.offset1
-        -unless flash[:error].blank?
-          .alert.alert-error= flash[:error]
+      .messages
+        .row.span12
+          .span8.offset1
+            -unless flash[:error].blank?
+              .alert.alert-error= flash[:error]
 
-        -unless flash[:warn].blank?
-          .alert.alert-warning= flash[:warn]
+            -unless flash[:warn].blank?
+              .alert.alert-warning= flash[:warn]
 
-        -unless flash[:info].blank?
-          .alert.alert-info= flash[:info]
-        -unless flash[:success].blank?
-          .alert.alert-success= flash[:success]
+            -unless flash[:info].blank?
+              .alert.alert-info= flash[:info]
+            -unless flash[:success].blank?
+              .alert.alert-success= flash[:success]
           
       = yield

@@ -1,12 +1,21 @@
 
-.book .row {
+
+.repo .row h4,
+.repo .row p {
   padding: 10px;
+  padding-top: 5px;
 }
 
-.book .desc {
+.repo .row h4 {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.repo .desc {
   margin-bottom: 10px;
 }
 
-.book.odd .row {
-  background-color: #f8f8f8;
+.repo.odd .row {
+  /*background-color: #f8f8f8;*/
+  margin-bottom: 20px;
 }
