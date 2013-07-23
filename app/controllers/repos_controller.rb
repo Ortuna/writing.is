@@ -11,12 +11,10 @@ class ReposController < ApplicationController
   end
 
   private
-  def client
-    @client = Octokit::Client.new(:login => "me", :oauth_token => token)
-  end
 
   def get_user_repos(current_user)
     token   = current_user[:auth_token]
-    client.repos.tap { |r| flash[:success] = 'Updated repo list from github' }
+    @client = Octokit::Client.new(:login => "me", :oauth_token => token)
+    @client.repos.tap { |r| flash[:success] = 'Updated repo list from github' }
   end
 end

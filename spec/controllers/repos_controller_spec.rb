@@ -22,21 +22,28 @@ describe ReposController do
 
   describe :index do 
     render_views
+    before(:each) { controller.stub(:get_user_repos).and_return(repo_hash) }
+
     it 'it should render the correct template' do
-      controller.stub(:get_user_repos).and_return(repo_hash)
       get :index
+      expect(response).to be_success
       expect(response).to render_template("index")
     end
 
     it 'can list all the repos' do
-      
-      controller.stub(:get_user_repos).and_return(repo_hash)
       get :index
+
       expect(response.body).to match /example1/m
       expect(response.body).to match /example2/m
 
       expect(response.body).to match /desc1/m
       expect(response.body).to match /desc2/m
+    end
+
+    it 'should have a links to repo files' do
+      get :index
+      expect(response.body).to match repo_files_path(repo_hash[0]["name"])
+      expect(response.body).to match repo_files_path(repo_hash[1]["name"])
     end
   end
 
