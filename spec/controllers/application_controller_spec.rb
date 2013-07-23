@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BaseController do
+describe ApplicationController do
   it "finds the current user from session" do
     User.new(uid: 1, provider: 'github', name: 'test_user', auth_token: 'xyz').save
     session[:user_id] = User.first[:id]

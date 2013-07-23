@@ -1,4 +1,4 @@
-class OmniauthGithubController < BaseController
+class OmniauthGithubController < ApplicationController
   protect_from_forgery with: :exception
 
   def callback

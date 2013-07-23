@@ -1,4 +1,4 @@
-class BaseController < ActionController::Base
+class ApplicationController < ActionController::Base
   layout 'application'
 
   private

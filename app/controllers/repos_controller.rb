@@ -1,4 +1,4 @@
-class ReposController < BaseController
+class ReposController < ApplicationController
   protect_from_forgery with: :exception
 
   def show
@@ -11,9 +11,12 @@ class ReposController < BaseController
   end
 
   private
+  def client
+    @client = Octokit::Client.new(:login => "me", :oauth_token => token)
+  end
+
   def get_user_repos(current_user)
     token   = current_user[:auth_token]
-    client  = Octokit::Client.new(:login => "me", :oauth_token => token)
     client.repos.tap { |r| flash[:success] = 'Updated repo list from github' }
   end
 end

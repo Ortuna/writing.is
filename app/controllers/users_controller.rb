@@ -1,4 +1,4 @@
-class UsersController < BaseController
+class UsersController < ApplicationController
   protect_from_forgery with: :exception
 
   def login; end
