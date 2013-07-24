@@ -1,4 +1,6 @@
 //= require ./ember/handlebars
 //= require ./ember/ember-latest
-//= require_tree ./github
+//= require ./github/underscore
+//= require ./github/github
+//= require ./app/editor
 //= require_tree ./app

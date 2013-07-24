@@ -1,3 +1,7 @@
-Editor = Ember.Application.create();
+Editor = Ember.Application.create({
+  needs: ['user']
+});
 
-// Editor.initialize();
+Editor.Router.map(function(){
+  this.route("repos", {path: '/repos'});
+});

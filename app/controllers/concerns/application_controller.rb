@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   layout 'application'
-
   private
   def current_user
     user_id = session[:user_id]
