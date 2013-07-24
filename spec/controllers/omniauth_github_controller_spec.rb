@@ -25,7 +25,7 @@ describe OmniauthGithubController do
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github] 
 
     get :callback
-    assert_redirected_to repos_path
+    assert_redirected_to editor_path
   end
 
   it 'redirect on invalid auth' do
@@ -39,7 +39,7 @@ describe OmniauthGithubController do
 
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
     get :callback
-    assert_redirected_to repos_path
+    assert_redirected_to editor_path
   end
 
   # test 'redirect to error when invalid session'

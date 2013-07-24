@@ -5,9 +5,6 @@ Writing::Application.routes.draw do
   get '/user/logout', to: 'users#logout'
   get '/user/login/callback',  to: 'omniauth_github#callback'
   get '/auth/github/callback', to: 'omniauth_github#callback'
-
-  resources :repos, only: [:index] do
-    resources :files, only: [:index]
-  end
+  get '/editor', to: 'editor#index', as: :editor
 
 end

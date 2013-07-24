@@ -8,7 +8,7 @@ describe 'Github authorization' do
 
   it 'can login with github' do
     get '/auth/github/callback'
-    expect(response).to redirect_to(repos_path)
+    expect(response).to redirect_to(editor_path)
   end
 
 end
