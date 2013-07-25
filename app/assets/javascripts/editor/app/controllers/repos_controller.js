@@ -1,5 +1,6 @@
 Editor.ReposController = Ember.Controller.extend({
-  setupController: function(controller, user) {
-    console.debug('here!');
+  init: function(){
+    this._super();
+    this.set('gh', Editor.github);
   }
 })
