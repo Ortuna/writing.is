@@ -16,6 +16,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 gem 'octokit'
+gem 'rack-cors'
 
 group :doc do
   gem 'sdoc', require: false

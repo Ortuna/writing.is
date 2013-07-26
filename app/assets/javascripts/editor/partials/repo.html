@@ -1,0 +1,16 @@
+<div class="span12">
+  <div class="repos">
+    <div data-ng-repeat='obj in tree | filter: search.filter'>
+    <ng-switch on="obj.type">
+      <div ng-switch-when="blob" class="row span8 offset1">
+          <h4>
+            <a href="#/repo/{{params.user}}/{{params.repo}}/{{obj.path}}/edit">
+              {{obj.path}}
+            </a>
+          </h4>
+      </div>
+    </ng-switch>
+    </div>
+
+  </div>
+</div>

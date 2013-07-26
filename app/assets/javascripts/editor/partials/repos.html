@@ -1,0 +1,10 @@
+<div class="span12">
+  <div class="repos">
+    <div data-ng-repeat='repo in repos | filter: search.filter'>
+      <div class="row span8 offset1">
+        <h4><a href="#/repo/{{repo.full_name}}">{{repo.full_name}}</a></h4>
+        <p>{{repo.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

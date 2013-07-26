@@ -1,4 +1,19 @@
 %script
   auth_token = "#{@current_user[:auth_token]}";
-= render 'editor/templates'
 = javascript_include_tag "editor/editor"
+
+.profile
+  %header
+    .row
+      .span12
+        .span1{'data-ng-controller' => 'ProfileController'}
+          %img{src: '{{profile.image}}', class:'profile-image'}
+        .span2{'data-ng-controller' => 'ProfileController'}
+          .row.span6
+            %h3 <a href="#/repos">{{profile.name}}</a>
+          .row.span6
+            %h4 Explore 
+        .span3.offset3.search
+          %input{:type => 'text', :class => 'span3', :placeholder => 'Filter', 'ng-model' => 'search.filter'}
+.ng-view
+
