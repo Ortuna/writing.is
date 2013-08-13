@@ -63,7 +63,7 @@ Editor.controller({
     $scope.repos   = githubFactory.getRepos(); 
   },
   RepoController: function($scope, githubFactory, $routeParams) {
-    var path       = $routeParams["dir"] ? Base64.decode($routeParams["dir"]) : "";
+    var path       = $routeParams["dir"] ? "/" + Base64.decode($routeParams["dir"]) : "";
     var repo       = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
 
     $scope.params  = $routeParams;
