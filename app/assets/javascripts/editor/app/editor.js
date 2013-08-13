@@ -7,10 +7,6 @@ Editor.factory('githubFactory', function($q, $rootScope){
     return github.getUser();
   };
 
-  factory.getRepo  = function(username, reponame){
-    return github.getRepo(username, reponame);
-  };
-
   factory.getProfile = function() {
     var deferred = $q.defer();
     this.getUser().show(null, function(error, user){
@@ -24,6 +20,10 @@ Editor.factory('githubFactory', function($q, $rootScope){
     });
     return deferred.promise;
   };
+  
+  factory.getRepo  = function(username, reponame){
+    return github.getRepo(username, reponame);
+  };
 
   factory.getRepos = function() {
     var deferred = $q.defer();
@@ -35,15 +35,19 @@ Editor.factory('githubFactory', function($q, $rootScope){
     return deferred.promise;
   };
 
-  factory.getTree = function(username, reponame) {
+  factory.getContents = function(username, reponame, path) {
     var deferred = $q.defer();
-    this.getRepo(username, reponame).getTree('master?recursive=1', function(error, tree) {
-      $rootScope.$apply(function() {
-        console.debug(tree);
-        deferred.resolve(tree);
+    this.getRepo(username, reponame).contents('master', path, function(err, data) {
+      angular.forEach(data, function(value, key) {
+        data[key].encodedPath = Base64.encode(data[key].path);
       });
+      deferred.resolve(data);
     });
     return deferred.promise;
+  };
+
+  factory.getFile = function(username, reponame, filePath) {
+
   };
 
   return factory;
@@ -57,21 +61,35 @@ Editor.controller({
     $scope.repos   = githubFactory.getRepos(); 
   },
   RepoController: function($scope, githubFactory, $routeParams) {
+    var path       = $routeParams["dir"] ? "/" + Base64.decode($routeParams["dir"]) : "";
     $scope.params  = $routeParams;
-    $scope.tree    = githubFactory.getTree($routeParams["user"], $routeParams["repo"]);
+    $scope.tree    = githubFactory.getContents($routeParams["user"], $routeParams["repo"], path);
+  },
+  EditorController: function($scope, githubFactory, $routeParams) {
+    $scope.params  = $routeParams;
+    $scope.file    = githubFactory.getFile($routeParams["user"],
+                                           $routeParams["repo"],
+                                           decodeURIComponent($routeParams["file"]));
+
   }
 });
 
 Editor.config(function($routeProvider){
-  $routeProvider.when('/repos',
-  {
+  $routeProvider.when('/repos', {
     controller: 'ReposController',
     templateUrl: 'assets/editor/partials/repos.html'
   })
-  .when('/repo/:user/:repo', 
-  {
+  .when('/repo/:user/:repo',  {
     controller: 'RepoController',
     templateUrl: 'assets/editor/partials/repo.html'
+  })
+  .when('/repo/:user/:repo/:dir',  {
+    controller: 'RepoController',
+    templateUrl: 'assets/editor/partials/repo.html'
+  })
+  .when('/edit/:user/:repo/:file', {
+    controller: 'EditorController',
+    templateUrl: 'assets/editor/partials/editor.html'
   })
   .otherwise({redirectTo: '/repos'});
 });
