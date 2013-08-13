@@ -28,9 +28,7 @@ Editor.factory('githubFactory', function($q, $rootScope){
   factory.getRepos = function() {
     var deferred = $q.defer();
     this.getUser().repos(function(error, repos){
-      $rootScope.$apply(function() {
-        deferred.resolve(repos);
-      });
+      $rootScope.$apply(function() { deferred.resolve(repos);});
     });
     return deferred.promise;
   };
@@ -38,10 +36,10 @@ Editor.factory('githubFactory', function($q, $rootScope){
   factory.getContents = function(username, reponame, path) {
     var deferred = $q.defer();
     this.getRepo(username, reponame).contents('master', path, function(err, data) {
-      angular.forEach(data, function(value, key) {
-        data[key].encodedPath = Base64.encode(data[key].path);
-      });
-      deferred.resolve(data);
+        angular.forEach(data, function(value, key) {
+          data[key].encodedPath = Base64.encode(data[key].path);
+        });
+      $rootScope.$apply(function() { deferred.resolve(data); });
     });
     return deferred.promise;
   };
