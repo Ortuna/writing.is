@@ -33,19 +33,23 @@ Editor.factory('githubFactory', function($q, $rootScope){
     return deferred.promise;
   };
 
-  factory.getContents = function(username, reponame, path) {
+  factory.getContents = function(repo, path) {
     var deferred = $q.defer();
-    this.getRepo(username, reponame).contents('master', path, function(err, data) {
-        angular.forEach(data, function(value, key) {
-          data[key].encodedPath = Base64.encode(data[key].path);
-        });
+    repo.contents('master', path, function(err, data) {
+      angular.forEach(data, function(value, key) {
+        data[key].encodedPath = Base64.encode(data[key].path);
+      });
       $rootScope.$apply(function() { deferred.resolve(data); });
     });
     return deferred.promise;
   };
 
-  factory.getFile = function(username, reponame, filePath) {
-
+  factory.getFile = function(repo, file) {
+    var deferred = $q.defer();
+    repo.read('master', file, function(err, data) {
+      $rootScope.$apply(function() { deferred.resolve(data); });
+    });
+    return deferred.promise;
   };
 
   return factory;
@@ -59,15 +63,18 @@ Editor.controller({
     $scope.repos   = githubFactory.getRepos(); 
   },
   RepoController: function($scope, githubFactory, $routeParams) {
-    var path       = $routeParams["dir"] ? "/" + Base64.decode($routeParams["dir"]) : "";
+    var path       = $routeParams["dir"] ? Base64.decode($routeParams["dir"]) : "";
+    var repo       = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
+
     $scope.params  = $routeParams;
-    $scope.tree    = githubFactory.getContents($routeParams["user"], $routeParams["repo"], path);
+    $scope.tree    = githubFactory.getContents(repo, path);
   },
   EditorController: function($scope, githubFactory, $routeParams) {
+    var path       = $routeParams["file"] ? Base64.decode($routeParams["file"]) : "";
+    var repo       = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
+
     $scope.params  = $routeParams;
-    $scope.file    = githubFactory.getFile($routeParams["user"],
-                                           $routeParams["repo"],
-                                           decodeURIComponent($routeParams["file"]));
+    $scope.file    = githubFactory.getFile(repo, path);
 
   }
 });
