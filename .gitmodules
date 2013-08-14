@@ -1,0 +1,3 @@
+[submodule "app/assets/javascripts/editor/ace-builds"]
+	path = app/assets/javascripts/editor/ace-builds
+	url = git@github.com:ajaxorg/ace-builds.git

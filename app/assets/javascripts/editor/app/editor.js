@@ -63,20 +63,29 @@ Editor.controller({
     $scope.repos   = githubFactory.getRepos(); 
   },
   RepoController: function($scope, githubFactory, $routeParams) {
-    var path       = $routeParams["dir"] ? "/" + Base64.decode($routeParams["dir"]) : "";
-    var repo       = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
-
     $scope.params  = $routeParams;
-    $scope.tree    = githubFactory.getContents(repo, path);
+    $scope.path    = $routeParams["dir"] ? "/" + Base64.decode($routeParams["dir"]) : "";
+    $scope.repo    = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
+    $scope.tree    = githubFactory.getContents($scope.repo, $scope.path);
   },
   EditorController: function($scope, githubFactory, $routeParams) {
-    var path       = $routeParams["file"] ? Base64.decode($routeParams["file"]) : "";
-    var repo       = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
-
+    $scope.$emit('hideHeader');
     $scope.params  = $routeParams;
-    $scope.file    = githubFactory.getFile(repo, path);
+    $scope.repo    = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
+    $scope.path    = $routeParams["file"] ? Base64.decode($routeParams["file"]) : "";
+    $scope.file    = githubFactory.getFile($scope.repo, $scope.path);
+    $scope.editor = ace.edit("main-editor");
+  },
+  ApplicationController: function($scope) {
+    $scope.showHeader = true;
+    $scope.$on('showHeader', function(){
+      $scope.showHeader = true;
+    });
 
-  }
+    $scope.$on('hideHeader', function(){
+      $scope.showHeader = false;
+    });
+  },
 });
 
 Editor.config(function($routeProvider){

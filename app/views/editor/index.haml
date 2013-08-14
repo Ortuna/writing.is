@@ -1,19 +1,34 @@
 %script
   auth_token = "#{@current_user[:auth_token]}";
 = javascript_include_tag "editor/editor"
+%div{'data-ng-controller' => 'ApplicationController', 'ng-class' => "{true:'container', false:'full-width'}[showHeader]"}
+  .messages
+    .row.span12
+      .span8.offset1
+        -unless flash[:error].blank?
+          .alert.alert-error= flash[:error]
 
-.profile
-  %header
-    .row
-      .span12
-        .span1{'data-ng-controller' => 'ProfileController'}
-          %img{src: '{{profile.image}}', class:'profile-image'}
-        .span2{'data-ng-controller' => 'ProfileController'}
-          .row.span6
-            %h3 <a href="#/repos">{{profile.name}}</a>
-          .row.span6
-            %h4 Explore 
-        .span3.offset3.search
-          %input{:type => 'text', :class => 'span3', :placeholder => 'Filter', 'ng-model' => 'search.filter'}
-.ng-view
+        -unless flash[:warn].blank?
+          .alert.alert-warning= flash[:warn]
 
+        -unless flash[:info].blank?
+          .alert.alert-info= flash[:info]
+        -unless flash[:success].blank?
+          .alert.alert-success= flash[:success]
+    %div{'data-ng-controller' => 'ApplicationController', 'ng-show' => 'showHeader == true'}
+      .profile
+        %header
+          .row
+            .span12
+              .span1{'data-ng-controller' => 'ProfileController'}
+                %img{src: '{{profile.image}}', class:'profile-image'}
+              .span2{'data-ng-controller' => 'ProfileController'}
+                .row.span6
+                  %h3 <a href="#/repos">{{profile.name}}</a>
+                .row.span6
+                  %h4 Explore 
+              .span3.offset3.search
+                %input{:type => 'text', :class => 'span3', :placeholder => 'Filter', 'ng-model' => 'search.filter'}
+      .ng-view
+    %div{'data-ng-controller' => 'ApplicationController', 'ng-show' => 'showHeader == false'}
+      .span12.ng-view#editor

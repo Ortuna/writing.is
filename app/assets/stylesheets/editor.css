@@ -1,0 +1,15 @@
+.full-width {
+  width:100%;
+}
+
+.full-width .editor {
+  width:100%;
+  margin:0;
+  padding:0;
+}
+
+#editor {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+}
