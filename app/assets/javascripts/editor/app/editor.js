@@ -74,7 +74,12 @@ Editor.controller({
     $scope.repo    = githubFactory.getRepo($routeParams["user"], $routeParams["repo"]);
     $scope.path    = $routeParams["file"] ? Base64.decode($routeParams["file"]) : "";
     $scope.file    = githubFactory.getFile($scope.repo, $scope.path);
-    $scope.editor = ace.edit("main-editor");
+    $scope.editorOptions = {
+        lineWrapping : true,
+        lineNumbers: true,
+        readOnly: 'nocursor',
+        mode: 'xml',
+    };
   },
   ApplicationController: function($scope) {
     $scope.showHeader = true;
